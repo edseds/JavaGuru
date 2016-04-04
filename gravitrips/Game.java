@@ -33,7 +33,10 @@ public class Game {
 	}
 
 	private void printWinner(Token symbol) {
+		System.out.println("");
+		System.out.println("------------------------------------");
 		System.out.println("Player: " + symbol + " win the game.");
+		board.printBoard();
 	}
 
 	private boolean hasWinner(Token symbol) {

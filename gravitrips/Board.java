@@ -1,59 +1,67 @@
 package gravitrips;
 
-import java.util.ArrayList;
-
 public class Board {
-
-	private ArrayList<ArrayList<Token>> field = new ArrayList<ArrayList<Token>>();
+	private final int column = 7;
+	private final int row = 6;
+	private Token[][] field = new Token[row][column];
 
 	public Board() {
 
-		for (int i = 0; i < 6; i++) {
-
-			ArrayList<Token> horisontal = new ArrayList<Token>();
-
-			for (int j = 0; j < 7; j++) {
-
-				horisontal.add(Token.EMPTY);
-
+		for (int j = 0; j < column; j++) {
+			for (int i = 0; i < row; i++) {
+				field[i][j] = Token.EMPTY;
 			}
-			field.add(horisontal);
 		}
 	}
 
 	public void printBoard() {
-		System.out.println("");
-		System.out.println("    1, 2, 3, 4, 5, 6, 7");
-		for (Integer i = 0; i < this.field.size(); i++) {
-			ArrayList<Token> horisontal = field.get(i);
-			Integer printInteger = i + 1;
-			System.out.println(printInteger.toString() + ": " + horisontal.toString());
 
+		String tmpValue;
+
+		System.out.println("");
+		// System.out.println(" 1, 2, 3, 4, 5, 6, 7");
+
+		tmpValue = "   ";
+		for (int i = 1; i <= column; i++) {
+			tmpValue += i;
+			if (i != column)
+				tmpValue += ", ";
+
+		}
+
+		System.out.println(tmpValue);
+
+		for (int i = 0; i < field.length; i++) {
+			tmpValue = "";
+			for (int j = 0; j < field[i].length; j++) {
+				tmpValue += "  " + field[i][j];
+			}
+			System.out.println(i + 1 + "" + tmpValue);
 		}
 	}
 
 	public int getColumns() {
-		return field.get(0).size();
+		return field[0].length;
 	}
 
 	public int getRows() {
-		return field.size();
+		return field.length;
 	}
 
 	public Token getCell(int column, int row) {
-		return field.get(row).get(column);
+		return field[row][column];
 	}
 
 	public boolean setCellValue(int column, Token playertoken) {
-		if (field.get(0).get(column) != Token.EMPTY) {
+		if (field[0][column] != Token.EMPTY) {
 			return false;
 		}
-		int indexvalue = field.size() - 1;
+		int indexvalue = field.length - 1;
 
-		while (field.get(indexvalue).get(column) != Token.EMPTY) {
+		while (field[indexvalue][column] != Token.EMPTY) {
 			indexvalue--;
 		}
-		field.get(indexvalue).set(column, playertoken);
+		field[indexvalue][column] = playertoken;
 
 		return true;
 	}

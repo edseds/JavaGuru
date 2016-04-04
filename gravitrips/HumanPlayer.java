@@ -19,7 +19,9 @@ public class HumanPlayer extends Player {
 
 				move = Integer.parseInt(scanner.nextLine());
 
-				if (move >= 0 && move < board.getColumns()) {
+				if (move >= 1 && move <= board.getColumns()) {
+					move--;
+
 					if (board.getCell(move, 0) == Token.EMPTY) {
 						board.setCellValue(move, getPlayerToken());
 						setValidMove = true;
@@ -28,10 +30,11 @@ public class HumanPlayer extends Player {
 					}
 
 				} else {
-					System.out.println("Please set valid move. Try again please! Valid number range (0-6).");
+					System.out.println("Please set valid move. Try again please! Valid number range (1-7).");
 				}
 			} catch (Exception ex) {
-				System.out.println("Something goes wrong! Try again please! Valid number range (0-6).");
+				System.out.println("Something goes wrong! Try again please! Valid number range (1-7).");
+				System.out.println(ex.toString());
 			}
 
 		} while (!setValidMove);
