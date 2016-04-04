@@ -23,7 +23,7 @@ public class Board {
 
 	public void printBoard() {
 		System.out.println("");
-		System.out.println("1, 2, 3, 4, 5, 6, 7");
+		System.out.println("    1, 2, 3, 4, 5, 6, 7");
 		for (Integer i = 0; i < this.field.size(); i++) {
 			ArrayList<Token> horisontal = field.get(i);
 			Integer printInteger = i + 1;
