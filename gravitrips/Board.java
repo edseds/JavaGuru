@@ -30,24 +30,17 @@ public class Board {
 			System.out.println(printInteger.toString() + ": " + horisontal.toString());
 
 		}
-		// System.out.println(field.size());
-		// System.out.println("ffff:"+field.get(6).size());
-		// System.out.println(field.get(6).get(6).toString());
 	}
 
 	public int getColumns() {
-		// return field.size();
 		return field.get(0).size();
 	}
 
 	public int getRows() {
 		return field.size();
-		// return field.get(0).size();
 	}
 
 	public Token getCell(int column, int row) {
-	//	System.out.println("Row:" + row + " Column:" + column);
-	//	System.out.println(field.get(row).get(column));
 		return field.get(row).get(column);
 	}
 

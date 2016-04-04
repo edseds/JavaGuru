@@ -2,56 +2,50 @@ package gravitrips;
 
 public class Game {
 
-	static final int RESULT_TO_WIN = 3;
-	Player currentPlayer = null;
+	static private final int RESULT_TO_WIN = 3;
 
-	public void runGame() {
-		Board board = new Board();
-		boolean isWinner = false;
+	Board board = new Board();
 
-		Player playerO = new Player(Token.O);
-		Player playerX = new Player(Token.X);
+	public void runGame(Player playerO, Player playerX) {
+		Player currentPlayer = null;
 
-		if (Token.getRandom() == Token.O)
-			currentPlayer = playerO;
-		else
-			currentPlayer = playerX;
+		playerO.setToken(Token.O);
+		playerX.setToken(Token.X);
 
 		System.out.println("Start the Gravitrips!");
 
 		do {
-			currentPlayer.setMove(board);
-			isWinner = hasWinner(board);
-			board.printBoard();
-
-			if (!isWinner) {
-				if (currentPlayer == playerX)
+			if (currentPlayer == null)
+				if (Token.getRandom() == Token.O)
 					currentPlayer = playerO;
 				else
 					currentPlayer = playerX;
-			}
+			else if (currentPlayer == playerX)
+				currentPlayer = playerO;
+			else
+				currentPlayer = playerX;
 
-		} while (!isWinner);
+			currentPlayer.setMove(board);
 
-		printWinner(board);
+		} while (!hasWinner(currentPlayer.getPlayerToken()));
+		printWinner(currentPlayer.getPlayerToken());
 
 	}
 
-	private void printWinner(Board board) {
-		System.out.println("Player: " + currentPlayer.getPlayerToken().toString() + " win the game.");
+	private void printWinner(Token symbol) {
+		System.out.println("Player: " + symbol + " win the game.");
 	}
 
-	private boolean hasWinner(Board board) {
-		return checkHorizontol(board, currentPlayer) || checkColumn(board, currentPlayer)
-				|| checkDiagonal(board, currentPlayer);
+	private boolean hasWinner(Token symbol) {
+		return checkHorizontol(symbol) || checkColumn(symbol) || checkDiagonal(symbol);
 	}
 
-	private boolean checkHorizontol(Board board, Player player) {
+	private boolean checkHorizontol(Token symbol) {
 		int count = 0;
 
 		for (int x = 0; x < board.getRows(); x++) {
 			for (int i = 0; i < board.getColumns(); i++) {
-				if (board.getCell(i, x) == player.getPlayerToken())
+				if (board.getCell(i, x) == symbol)
 					count++;
 				else
 					count = 0;
@@ -65,12 +59,12 @@ public class Game {
 		return false;
 	}
 
-	private boolean checkColumn(Board board, Player player) {
+	private boolean checkColumn(Token symbol) {
 		int count = 0;
 		for (int x = 0; x < board.getColumns(); x++) {
 			for (int i = 0; i < board.getRows(); i++) {
 
-				if (board.getCell(x, i) == player.getPlayerToken())
+				if (board.getCell(x, i) == symbol)
 					count++;
 				else
 					count = 0;
@@ -83,29 +77,29 @@ public class Game {
 		return false;
 	}
 
-	private boolean checkDiagonal(Board board, Player player) {
-		return checkLeftDiagonal(board, player) || checkRightDiagnol(board, player);
+	private boolean checkDiagonal(Token symbol) {
+		return checkLeftDiagonal(symbol) || checkRightDiagnol(symbol);
 	}
 
-	private boolean checkLeftDiagonal(Board board, Player player) {
+	private boolean checkLeftDiagonal(Token symbol) {
 		for (int x = RESULT_TO_WIN - 1; x < board.getColumns(); x++) {
-			if (findSymbolsLeftDiagonal(x, 0, player, board))
+			if (findSymbolsLeftDiagonal(x, 0, symbol))
 				return true;
 		}
 
 		for (int x = 1; x < board.getRows() - (RESULT_TO_WIN - 1); x++) {
-			if (findSymbolsLeftDiagonal(board.getColumns(), x, player, board))
+			if (findSymbolsLeftDiagonal(board.getColumns(), x, symbol))
 				return true;
 		}
 
 		return false;
 	}
 
-	private boolean findSymbolsLeftDiagonal(int x, int y, Player player, Board board) {
+	private boolean findSymbolsLeftDiagonal(int x, int y, Token symbol) {
 		return false;
 	}
 
-	private boolean checkRightDiagnol(Board board, Player player) {
+	private boolean checkRightDiagnol(Token symbol) {
 		return false;
 	}
 
