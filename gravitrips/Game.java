@@ -81,29 +81,52 @@ public class Game {
 	}
 
 	private boolean checkDiagonal(Token symbol) {
-		return checkLeftDiagonal(symbol) || checkRightDiagnol(symbol);
-	}
+		int count = 0;
 
-	private boolean checkLeftDiagonal(Token symbol) {
-		for (int x = RESULT_TO_WIN - 1; x < board.getColumns(); x++) {
-			if (findSymbolsLeftDiagonal(x, 0, symbol))
-				return true;
+		for (int k = 0; k < board.getRows() * 2; k++) {
+			for (int j = 0; j <= k; j++) {
+				int i = k - j;
+				if (i < board.getColumns() && j < board.getRows() && board.getCell(i, j) == symbol)
+					count++;
+				else
+					count = 0;
+
+				if (count == RESULT_TO_WIN)
+					return true;
+			}
 		}
-
-		for (int x = 1; x < board.getRows() - (RESULT_TO_WIN - 1); x++) {
-			if (findSymbolsLeftDiagonal(board.getColumns(), x, symbol))
-				return true;
-		}
-
 		return false;
 	}
 
-	private boolean findSymbolsLeftDiagonal(int x, int y, Token symbol) {
-		return false;
-	}
-
-	private boolean checkRightDiagnol(Token symbol) {
-		return false;
-	}
-
+	/*
+	 * private boolean checkLeftDiagonal(Token symbol) {
+	 * 
+	 * for (int k = RESULT_TO_WIN; k < board.getColumns(); k++) { int count = 0;
+	 * 
+	 * for (int j = 0; j < k; j++) { int i = k - j;
+	 * 
+	 * // System.out.print(board.getCell(i, j) + " ");
+	 * 
+	 * if (board.getCell(i, j) == symbol) count++; else count = 0;
+	 * 
+	 * if (count == RESULT_TO_WIN) { return true; } } } return false;
+	 * 
+	 * }
+	 * 
+	 * private boolean checkRightDiagnol(Token symbol) {
+	 * 
+	 * int count = 0;
+	 * 
+	 * for (int k = board.getColumns() - 2; k >= 0; k--) { for (int j = 0; j <=
+	 * k; j++) { int i = k - j;
+	 * System.out.print(board.getCell(board.getColumns() - i - 1,
+	 * board.getRows() - j - 1) + " ");
+	 * 
+	 * // if (board.getCell(board.getColumns() - i - 1, board.getRows() // - j -
+	 * 1) == symbol) // count++; // else // count = 0;
+	 * 
+	 * // if (count == RESULT_TO_WIN) { // return true; // } } } return false;
+	 * 
+	 * }
+	 */
 }
