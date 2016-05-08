@@ -1,14 +1,14 @@
 package gravitrips;
 
 public class Board {
-	private final int column = 7;
-	private final int row = 6;
-	private Token[][] field = new Token[row][column];
+	private final int COLUMN = 7;
+	private final int ROW = 6;
+	private Token[][] field = new Token[ROW][COLUMN];
 
 	public Board() {
 
-		for (int j = 0; j < column; j++) {
-			for (int i = 0; i < row; i++) {
+		for (int j = 0; j < COLUMN; j++) {
+			for (int i = 0; i < ROW; i++) {
 				field[i][j] = Token.EMPTY;
 			}
 		}
@@ -18,13 +18,12 @@ public class Board {
 
 		String tmpValue;
 
-		System.out.println("");
-		// System.out.println(" 1, 2, 3, 4, 5, 6, 7");
+		System.out.println();
 
 		tmpValue = "   ";
-		for (int i = 1; i <= column; i++) {
+		for (int i = 1; i <= COLUMN; i++) {
 			tmpValue += i;
-			if (i != column)
+			if (i != COLUMN)
 				tmpValue += ", ";
 
 		}
@@ -36,16 +35,16 @@ public class Board {
 			for (int j = 0; j < field[i].length; j++) {
 				tmpValue += "  " + field[i][j];
 			}
-			System.out.println(i + 1 + "" + tmpValue);
+			System.out.println((i + 1 + tmpValue).toString());
 		}
 	}
 
 	public int getColumns() {
-		return field[0].length;
+		return COLUMN;
 	}
 
 	public int getRows() {
-		return field.length;
+		return ROW;
 	}
 
 	public Token getCell(int column, int row) {
@@ -56,12 +55,12 @@ public class Board {
 		if (field[0][column] != Token.EMPTY) {
 			return false;
 		}
-		int indexvalue = field.length - 1;
+		int i = field.length - 1;
 
-		while (field[indexvalue][column] != Token.EMPTY) {
-			indexvalue--;
+		while (field[i][column] != Token.EMPTY) {
+			i--;
 		}
-		field[indexvalue][column] = playertoken;
+		field[i][column] = playertoken;
 
 		return true;
 	}

@@ -6,9 +6,6 @@ public abstract class Player {
 
 	private Token playertoken;
 
-	/*
-	 * public Player(Token token) { this.playertoken = token; }
-	 */
 	public void setToken(Token token) {
 		this.playertoken = token;
 	}

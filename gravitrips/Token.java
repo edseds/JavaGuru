@@ -30,18 +30,4 @@ public enum Token {
 
 		return values()[randomelement];
 	}
-	// !!!!Deprecated!!!!:
-
-	/*
-	 * public static boolean isInEnum(Object value) { try { String move =
-	 * value.toString(); for (Token t : Token.values()) { if (t.equals(move)) {
-	 * return true; } } return false; } catch (Exception ex) { return false; } }
-	 */
-
-	/*
-	 * public <E extends Enum<E>> boolean isInEnum(String value, Class<E>
-	 * enumClass) { for (E e : enumClass.getEnumConstants()) {
-	 * if(e.name().equals(value)) { return true; } } return false; }
-	 */
-
 }
